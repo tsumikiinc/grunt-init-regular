@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+$wh: #fff;
+$bk: #000;
+
+$blue: #2c3369;
+
+$twitter: #55acee;
+$instagram: #517FA4;
+$foursquare: #1eb6e0;
+$github: #221814;
+$tumblr: #2C4762;
+
+// ::-moz-selection {
+//   background: $bk;
+//   color: $wh;
+// }
+// ::selection {
+//   background: $bk;
+//   color: $wh;
+// }
+
+body {
+  background: $wh;
+  color: #333;
+  font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", sans-serif;
+  font-size: 16px;
+}
+
+ul,ol,li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+%main_width {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+// %form_width {
+//   width: 740px;
+//   margin: 0 auto;
+// }
