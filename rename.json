@@ -1,2 +1,12 @@
 {
+  ".DS_Store": false,
+  ".AppleDouble": false,
+  ".LSOverride": false,
+  "Thumbs.db": false,
+  "ehthumbs.db": false,
+  "Desktop.ini": false,
+  "*.cab": false,
+  "*.msi": false,
+  "*.msm": false,
+  "*.msp": false
 }

@@ -25,7 +25,7 @@ exports.warnOn = '*';
 
 // The actual init template.
 exports.template = function(grunt, init, done) {
-  console.log(init);
+  var tempname = 'regular/';
 
   init.process({type: 'site'}, [
     // Prompt for these values.
@@ -35,14 +35,15 @@ exports.template = function(grunt, init, done) {
     init.prompt('version', '0.1.0'),
     init.prompt('doctype', 'HTML5'),
     init.prompt('charset', 'urf-8'),
-    init.prompt('siteTitle')
+    init.prompt('siteTitle'),
+    init.prompt('template_dir', 'mytemp')
     // init.prompt('licenses'),
     // init.prompt('author_name'),
     // init.prompt('author_email'),
     // init.prompt('author_url', 'http://www.tsumikiinc.com')
   ], function(err, props) {
-      console.log(props);
-
+      var i, l, k;
+      var othertemp = init.expand(tempname + props.template_dir + '/**/*.{scss,js,coffee,sass,jade}');
       var SKIPS = [
         '*.png',
         '*.jpg',
@@ -53,18 +54,17 @@ exports.template = function(grunt, init, done) {
       // Files to copy (and process).
       var files = init.filesToCopy(props);
 
-      // A few additional properties.
-      // props.appName = props.name.replace(/(\-[a-z])/g,
-      //   function ($1) {
-      //     return $1.toUpperCase().replace('-', '');
-      //   });
-      // props.keywords = [];
+
+      for (i = 0, l = othertemp.length; i < l; i++) {
+        k = othertemp[i].rel;
+        files[ 'src/' + k.replace(tempname, '') ] = othertemp[i].abs;
+      }
 
       // Add properly-named license files.
       // init.addLicenseFiles(files, props.licenses);
 
       // Actually copy (and process) files.
-      console.log(files);
+
       init.copyAndProcess(files, props, {noProcess: SKIPS});
 
       // if(props['directories']){
@@ -80,6 +80,7 @@ exports.template = function(grunt, init, done) {
       // }
 
       // Generate package.json file, used by npm and grunt.
+
       init.writePackageJSON('package.json', {
         name: props.name,
         version: props.version,
