@@ -17,8 +17,8 @@ module.exports = function(grunt) {
 			img: 'img'
 		},
 
-		rename: {
-		},
+		// rename: {
+		// },
 		clean: {
 			buildDirpc: {
 				src: [
@@ -51,17 +51,39 @@ module.exports = function(grunt) {
 				// 	'Element title must not be empty.'
 				// ]
 			},
-			files: {
-				src: [
-					'<%= dir.src %>/<%= dir.pc %>/*.html',
-					'<%= dir.src %>/<%= dir.sp %>/*.html',
-					'<%= dir.src %>/<%= dir.pc %>/**/*.html',
-					'<%= dir.src %>/<%= dir.sp %>/**/*.html',
-					'!ignore/*.html',
-					'!test/*.html',
-					'!404.html'
-				]
+			pc {
+				files: {
+					src: [
+						'<%= dir.src %>/<%= dir.pc %>/*.html',
+						'<%= dir.src %>/<%= dir.pc %>/**/*.html',
+						'!ignore/*.html',
+						'!test/*.html',
+						'!404.html'
+					]
+				}
+			},
+			sp {
+				files: {
+					src: [
+						'<%= dir.src %>/<%= dir.sp %>/*.html',
+						'<%= dir.src %>/<%= dir.sp %>/**/*.html',
+						'!ignore/*.html',
+						'!test/*.html',
+						'!404.html'
+					]
+				}
 			}
+			// files: {
+			// 	src: [
+			// 		'<%= dir.src %>/<%= dir.pc %>/*.html',
+			// 		'<%= dir.src %>/<%= dir.sp %>/*.html',
+			// 		'<%= dir.src %>/<%= dir.pc %>/**/*.html',
+			// 		'<%= dir.src %>/<%= dir.sp %>/**/*.html',
+			// 		'!ignore/*.html',
+			// 		'!test/*.html',
+			// 		'!404.html'
+			// 	]
+			// }
 		},
 		sass: {
 			options: {
@@ -125,34 +147,21 @@ module.exports = function(grunt) {
 			}
 		},
 		uglify: {
-			init: {
-				options: {
-					preserveComments: 'some'
-				},
-				expand: true,
-				mangle: true,
-				cwd: '<%= dir.src %>/<%= dir.js %>/',
-				src: '**/*.js',
-				dest: '<%= dir.src %>/<%= dir.js %>/'
+			options: {
+				preserveComments: 'some'
 			},
 			pc: {
-				options: {
-					preserveComments: 'some'
-				},
 				expand: true,
 				mangle: true,
 				cwd: '<%= dir.src %>/<%= dir.pc %>/<%= dir.js %>/',
-				src: ['*.js', '!lib/*.js', '!top.js'],
+				src: ['*.js', '!lib/*.js'],
 				dest: '<%= dir.build %>/<%= dir.pc %>/<%= dir.js %>/'
 			},
 			sp: {
-				options: {
-					preserveComments: 'some'
-				},
 				expand: true,
 				mangle: true,
 				cwd: '<%= dir.src %>/<%= dir.sp %>/<%= dir.js %>/',
-				src: ['*.js', '!lib/*.js', '!top.js'],
+				src: ['*.js', '!lib/*.js'],
 				dest: '<%= dir.build %>/<%= dir.sp %>/<%= dir.js %>/'
 			}
 		},
@@ -267,7 +276,7 @@ module.exports = function(grunt) {
 					'<%= csslint.pc.src %>',
 					'<%= dir.src %>/<%= dir.pc %>/<%= dir.js %>/*.js'
 				],
-				tasks: ['sass:pc', 'csslint:pc', 'styleguide:pc']
+				tasks: ['sass:pc', 'csslint:pc', 'jshint:pc']
 			},
 			sp: {
 				files: [
@@ -278,32 +287,8 @@ module.exports = function(grunt) {
 					'<%= csslint.sp.src %>',
 					'<%= dir.src %>/<%= dir.sp %>/<%= dir.js %>/*.js'
 				],
-				tasks: ['sass:sp', 'csslint:sp']
-			}//,
-			// sass: {
-			// 	files: [
-			// 		'<%= dir.src %>/<%= dir.sass %>/*.scss',
-			// 		'<%= dir.src %>/<%= dir.sass %>/import/*.scss'
-			// 	],
-			// 	tasks: ['sass']
-			// },
-			// css: {
-			// 	files: [
-			// 		'<%= dir.src %>/<%= dir.css %>/*.css'
-			// 	],
-			// 	tasks: ['csslint']
-			// },
-			// html: {
-			// 	files: [
-			// 		'<%= dir.src %>/*.html',
-			// 		'<%= dir.src %>/**/*.html'
-			// 	],
-			// 	tasks: []
-			// },
-			// js: {
-			// 	files: '<%= dir.src %>/<%= dir.js %>/*.js',
-			// 	tasks: ['jshint']
-			// }
+				tasks: ['sass:sp', 'csslint:sp', 'jshint:sp']
+			}
 		},
 		'ftp-deploy': {
 			testpc: {
@@ -326,7 +311,7 @@ module.exports = function(grunt) {
 				dest: '/path/',
 				exclusions: ['.DS_Store']
 			},
-			uppc: {
+			deploypc: {
 				auth: {
 					host: 'host',
 					port: 21,
@@ -336,7 +321,7 @@ module.exports = function(grunt) {
 				dest: '/path/',
 				exclusions: ['.DS_Store']
 			},
-			upsp: {
+			deploysp: {
 				auth: {
 					host: 'host',
 					port: 21,
@@ -359,11 +344,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	// grunt.loadNpmTasks('grunt-processhtml');
+	grunt.loadNpmTasks('grunt-processhtml');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-styleguide');
 	grunt.loadNpmTasks('grunt-ftp-deploy');
+	// grunt.loadNpmTasks('grunt-sftp-deploy');
 
 
 	grunt.registerTask('livepc', ['connect:livepc', 'watch:pc']);
@@ -374,7 +360,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('buildpc', [
 		'clean:buildDirpc',
 		'sass:pc',
-		'validation',
+		'validation:pc',
 		'csslint:pc',
 		'cssmin:pc',
 		'jshint:pc',
@@ -388,7 +374,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('buildsp', [
 		'clean:buildDirsp',
 		'sass:sp',
-		'validation',
+		'validation:sp',
 		'csslint:sp',
 		'cssmin:sp',
 		'jshint:sp',
@@ -400,7 +386,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('testpc', ['ftp-deploy:testpc']);
 	grunt.registerTask('testsp', ['ftp-deploy:testsp']);
-	grunt.registerTask('uppc', ['ftp-deploy:uppc']);
-	grunt.registerTask('upsp', ['ftp-deploy:upsp']);
+	grunt.registerTask('deploypc', ['ftp-deploy:deploypc']);
+	grunt.registerTask('deploysp', ['ftp-deploy:deploysp']);
 
 };
