@@ -42,80 +42,93 @@ exports.template = function(grunt, init, done) {
     // init.prompt('author_email'),
     // init.prompt('author_url', 'http://www.tsumikiinc.com')
   ], function(err, props) {
-      var i, l, k;
-      var othertemp = init.expand(tempname + props.template_dir + '/**/*.{scss,js,coffee,sass,jade}');
-      var SKIPS = [
-        '*.png',
-        '*.jpg',
-        '*.gif',
-        '*.ico'
-      ];
+    var othertemp = init.expand(tempname + props.template_dir + '/**/*.{scss,js,coffee,sass,jade}');
+    var skip = [
+      '*.png',
+      '*.jpg',
+      '*.gif',
+      '*.ico'
+    ];
+    var i, l, k;
 
-      // Files to copy (and process).
-      var files = init.filesToCopy(props);
+    // Files to copy (and process).
+    var files = init.filesToCopy(props);
 
-
-      for (i = 0, l = othertemp.length; i < l; i++) {
-        k = othertemp[i].rel;
-        files[ 'src/' + k.replace(tempname, '') ] = othertemp[i].abs;
-      }
-
-      // Add properly-named license files.
-      // init.addLicenseFiles(files, props.licenses);
-
-      // Actually copy (and process) files.
-
-      init.copyAndProcess(files, props, {noProcess: SKIPS});
-
-      // if(props['directories']){
-      //   directories = props['directories'].split(',');
-
-      //   directories.forEach(function(directory){
-
-      //     var html = grunt.file.read(init.srcpath('index.html'));
-      //     var temp = grunt.template.process(html, {data: props, delimiters: 'init'});
-
-      //     grunt.file.write(directory + '/index.html', temp);
-      //   });
-      // }
-
-      // Generate package.json file, used by npm and grunt.
-
-      init.writePackageJSON('package.json', {
-        name: props.name,
-        version: props.version,
-        devDependencies: {
-          "grunt": "^0.4.5",
-          "grunt-contrib-watch": "^0.6.1",
-          "grunt-contrib-connect": "^0.7.1",
-          "grunt-contrib-sass": "^0.7.3",
-          "grunt-contrib-cssmin": "^0.9.0",
-          "grunt-contrib-copy": "^0.5.0",
-          "grunt-contrib-imagemin": "^0.7.0",
-          "grunt-contrib-uglify": "^0.4.0",
-          "grunt-contrib-jshint": "^0.10.0",
-          "grunt-contrib-clean": "^0.5.0",
-          "grunt-contrib-rename": "0.0.3",
-          "grunt-contrib-htmlmin": "^0.3.0",
-          "grunt-contrib-csslint": "^0.2.0",
-          "grunt-html-validation": "^0.1.18",
-          "grunt-ftp-deploy": "^0.1.3",
-          "grunt-sftp-deploy": "^0.0.11",
-          "grunt-processhtml": "^0.3.3"
-        }
-      });
-
-    // var exec = require('child_process').exec;
+    // exec
+    var exec = require('child_process').exec;
     // var path = require('path');
     // var targetPath = path.resolve('.');
 
-    // exec('npm install', {
-    //   cwd: targetPath
-    // }, function(err, stdout, stderr) {
 
+    for (i = 0, l = othertemp.length; i < l; i++) {
+      k = othertemp[i].rel;
+      files[ 'src/' + k.replace(tempname, '') ] = othertemp[i].abs;
+    }
+
+    // Add properly-named license files.
+    // init.addLicenseFiles(files, props.licenses);
+
+    // Actually copy (and process) files.
+
+    init.copyAndProcess(files, props, {noProcess: skip});
+
+    // if(props['directories']){
+    //   directories = props['directories'].split(',');
+
+    //   directories.forEach(function(directory){
+
+    //     var html = grunt.file.read(init.srcpath('index.html'));
+    //     var temp = grunt.template.process(html, {data: props, delimiters: 'init'});
+
+    //     grunt.file.write(directory + '/index.html', temp);
+    //   });
+    // }
+
+    // Generate package.json file, used by npm and grunt.
+
+    init.writePackageJSON('package.json', {
+      name: props.name,
+      version: props.version,
+      devDependencies: {
+        "grunt": "^0.4.5",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-contrib-sass": "^0.7.3",
+        "grunt-contrib-cssmin": "^0.9.0",
+        "grunt-contrib-connect": "^0.7.1",
+        "grunt-html-validation": "^0.1.15",
+        "grunt-contrib-copy": "^0.5.0",
+        "grunt-contrib-imagemin": "^0.7.0",
+        "grunt-contrib-uglify": "^0.4.0",
+        "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-clean": "^0.5.0",
+        "grunt-bower-task": "^0.3.4",
+        "grunt-mkdir": "^0.1.1",
+        "grunt-contrib-rename": "0.0.3",
+        "grunt-styleguide": "0.2.15",
+        "grunt-contrib-htmlmin": "^0.2.0",
+        "grunt-ftp-deploy": "^0.1.2",
+        "grunt-sftp-deploy": "^0.0.11",
+        "grunt-processhtml": "^0.3.3",
+        "grunt-php": "^0.3.3",
+        "grunt-contrib-csslint": "^0.2.0"
+      }
+    });
+
+
+    // Task ↓
+    // console.log('Now npm installing. Please wait...');
+    // exec('npm install', function(err, stdout, stderr) {
+    //   if (stdout) {
+    //     console.log('stdout: ' + stdout);
+    //   }
+    //   if (stderr) {
+    //     console.log('stderr: ' + stderr);
+    //   }
+    //   if (err !== null) {
+    //     console.log('Error: ' + err);
+    //   }
+    //   done();
     // });
-
-    done();
+    done();// 終了
   });
-
 };

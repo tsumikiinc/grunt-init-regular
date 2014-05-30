@@ -1,10 +1,10 @@
 # grunt-init-regular
 
-## var 0.1.1
+## var 0.1.2
 Grunt プロジェクトのレギュラー設定の grunt-init テンプレートです。
 
 
-## How to use
+## Set up
 
 `grunt-init` コアをグローバルにインストール
 ```
@@ -12,11 +12,13 @@ $ npm install grunt-init -g
 ```
 ユーザ直下に `~/.grunt-init` ディレクトリが作成されます
 
-ここに当テンプレートを `git clone`
+ここに当テンプレートを `clone`
 
 ```
 $ git clone https://github.com/tsumikiinc/grunt-init-regular.git ~/.grunt-init/regular
 ```
+
+## How to use
 
 プロジェクトを配置するディレクトリへ移動し `grunt-init` コマンドでテンプレートを生成します
 
@@ -42,7 +44,7 @@ Please answer the following:
 [?] template_dir (mytemp) 
 ```
 
-`mytemp/` ディレクトリに任意で各テンプレートファイル（_mixin.scss _common.js 等）を追加しておけます
+`mytemp/` ディレクトリに任意で各テンプレートファイル（_mixin.scss plugin.js 等）を追加しておけます
 
 以下のようにテンプレートが生成されます
 
