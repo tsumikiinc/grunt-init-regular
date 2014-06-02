@@ -1,5 +1,7 @@
 # grunt-init-regular
 
+**Wikiで詳細を記載してます [grunt initについて](https://github.com/tsumikiinc/grunt-init-regular/wiki/grunt-init%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)**
+
 ## var 0.1.3
 Grunt のレギュラー設定の grunt-init テンプレートです。
 
