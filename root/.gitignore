@@ -91,3 +91,6 @@ $RECYCLE.BIN/
 
 # ignore files #
 ignore/
+
+# grunt-init #
+.keep

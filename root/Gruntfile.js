@@ -1,10 +1,27 @@
 module.exports = function(grunt) {
-  'use strict';
-  var configObject, packageJson;
-  configObject = require('./grunt/config');
-  packageJson = grunt.file.readJSON('package.json');
-  grunt.config.init(configObject);
+
+  var configDir = 'gruntconfig',
+      fs = require('fs'),
+      path = require('path'),
+      packageJson = grunt.file.readJSON('package.json');
+
+  fs.readdirSync(configDir).forEach(function(filePath) {
+    var fileName, modulePath, stats;
+
+    modulePath = path.join(__dirname, configDir, filePath);
+    stats = fs.statSync(modulePath);
+    fileName = filePath.split('.')[0];
+    if (stats.isFile() && filePath.charAt(0) !== '.' && filePath.charAt(0) !== '_') {
+      return grunt.config.set(fileName, require(modulePath));
+    }
+  });
+
   Object.keys(packageJson.devDependencies).slice(1).forEach(grunt.loadNpmTasks);
+
+
+
+  // registerTask
+  grunt.registerTask('default', ['connect', 'watch']);
 
   grunt.registerTask('live', 'Live reloading.', function(target) {
     if (target === 'pc' || target === 'sp') {

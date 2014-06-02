@@ -1,6 +1,7 @@
 /* uglify */
 module.exports = {
   options: {
+    banner: '<%= banner =>',
     preserveComments: 'some',
     compress: {
       dead_code: true,

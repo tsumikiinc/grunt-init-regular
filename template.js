@@ -115,7 +115,7 @@ exports.template = function(grunt, init, done) {
     });
 
 
-    // Task ↓
+    // Task ↓ --------------------------
     // console.log('Now npm installing. Please wait...');
     // exec('npm install', function(err, stdout, stderr) {
     //   if (stdout) {
