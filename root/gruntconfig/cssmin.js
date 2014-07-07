@@ -2,14 +2,20 @@
 module.exports = {
   pc: {
     expand: true,
-    cwd: '<%= sass.pc.dest %>/',
-    src: '*.css',
-    dest: '<%= dir.build %>/<%= dir.pc %>/<%= dir.css %>/'
+    cwd: '<%= dir.src %>/<%= dir.pc %>/<%= dir.root %>/<%= dir.css %>/',
+    src: [
+      '*.css',
+      '**/*.css'
+    ],
+    dest: '<%= dir.build %>/<%= dir.pc %>/<%= dir.root %>/<%= dir.css %>/'
   },
   sp: {
     expand: true,
-    cwd: '<%= sass.sp.dest %>/',
-    src: '*.css',
-    dest: '<%= dir.build %>/<%= dir.sp %>/<%= dir.css %>/'
+    cwd: '<%= dir.src %>/<%= dir.sp %>/<%= dir.root %>/<%= dir.css %>/',
+    src: [
+      '*.css',
+      '**/*.css'
+    ],
+    dest: '<%= dir.build %>/<%= dir.sp %>/<%= dir.root %>/<%= dir.css %>/'
   }
 };

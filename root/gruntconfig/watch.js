@@ -13,7 +13,7 @@ module.exports = {
       '<%= csslint.pc.src %>',
       '<%= dir.src %>/<%= dir.pc %>/<%= dir.js %>/*.js'
     ],
-    tasks: ['sass:pc', 'csslint:pc', 'jshint:pc']
+    tasks: ['newer:sass:pc', 'newer:csslint:pc', 'jshint:pc']
   },
   sp: {
     files: [
@@ -24,6 +24,6 @@ module.exports = {
       '<%= csslint.sp.src %>',
       '<%= dir.src %>/<%= dir.sp %>/<%= dir.js %>/*.js'
     ],
-    tasks: ['sass:sp', 'csslint:sp', 'jshint:sp']
+    tasks: ['newer:sass:sp', 'newer:csslint:sp', 'jshint:sp']
   }
 };

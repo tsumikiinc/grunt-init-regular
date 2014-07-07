@@ -2,22 +2,18 @@
 module.exports = {
   pc: {
     expand: true,
-    cwd: '<%= dir.src %>/<%= dir.pc %>/',
+    cwd: '<%= dir.src %>/',
     src: [
-      '<%= dir.js %>/lib/**',
-      '*.html',
-      '**/*.html'
+      '<%= dir.pc %>/<%= dir.root %>/**/*'
     ],
-    dest: '<%= dir.build %>/<%= dir.pc %>/'
+    dest: '<%= dir.build %>/'
   },
   sp: {
     expand: true,
-    cwd: '<%= dir.src %>/<%= dir.sp %>/',
+    cwd: '<%= dir.src %>/',
     src: [
-      '<%= dir.js %>/lib/**',
-      '*.html',
-      '**/*.html'
+      '<%= dir.sp %>/<%= dir.root %>/**/*'
     ],
-    dest: '<%= dir.build %>/<%= dir.sp %>/'
+    dest: '<%= dir.build %>/'
   }
 };

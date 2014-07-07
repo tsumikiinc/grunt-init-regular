@@ -1,4 +1,4 @@
-/* ftp-deploy */
+/* sftp-deploy */
 module.exports = {
   testpc: {
     auth: {

@@ -2,7 +2,7 @@
 
 **Wikiで詳細を記載してます [grunt initについて](https://github.com/tsumikiinc/grunt-init-regular/wiki/grunt-init%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)**
 
-## var 0.1.3
+## var 0.1.4
 Grunt のレギュラー設定の grunt-init テンプレートです。
 
 
@@ -36,14 +36,25 @@ $ grunt-init regular
 ※ Project name にはキャメルケースかハイフンシンタックスを使用してください
 
 Please answer the following:
-[?] Project name (default) 
-[?] Project title (default) 
+[?] Project name (Project name) 
+[?] Project title (Project name) 
 [?] Description (The best project ever.) 
 [?] Version (0.1.0) 
 [?] doctype (HTML5) 
 [?] charset (urf-8) 
 [?] siteTitle 
+[?] sitePath (root) 
+[?] jade (true) 
+[?] uglify (true) 
+[?] cssmin (false) 
+[?] imagemin (true) 
+[?] cssExpressiveLanguage (sass) 
+[?] transferProtocol (sftp) 
 [?] template_dir (mytemp) 
+[?] Licenses (CC) 
+[?] Author name (sato) 
+[?] Author email (sato@tsumikiinc.com) 
+[?] Author url (http://www.tsumikiinc.com) 
 ```
 
 `mytemp/` ディレクトリに任意で各テンプレートファイル（_mixin.scss plugin.js 等）を追加しておけます
@@ -56,39 +67,37 @@ Please answer the following:
 ├── build
 ├── gruntconfig
 │   ├── banner.js
-│   ├── clean.js
 │   ├── connect.js
 │   ├── copy.js
-│   ├── csslint.js
-│   ├── cssmin.js
 │   ├── dir.js
-│   ├── ftp-deploy.js
 │   ├── html-validation.js
 │   ├── imagemin.js
+│   ├── jade.js
 │   ├── jshint.js
 │   ├── sass.js
-│   ├── styleguide.js
+│   ├── sftp-deploy.js
 │   ├── uglify.js
 │   └── watch.js
 ├── ignore
 ├── package.json
 └── src
-    ├── css
-    ├── img
-    ├── index.html
-    ├── js
-    │   └── lib
-    │       ├── jquery-1.11.1.min.js
-    │       └── jquery-2.1.1.min.js
+    ├── jade
     ├── mytemp
     │   └── import
     │       ├── _common.scss
     │       ├── _mixin.scss
     │       └── _normalize.scss
-    └── sass
-        ├── import
-        └── style.scss
-
+    ├── root
+    │   ├── css
+    │   ├── img
+    │   ├── index.html
+    │   └── js
+    │       └── lib
+    ├── sass
+    │   ├── import
+    │   └── style.scss
+    └── stylus
+        └── import
 ```
 
 ## License
