@@ -28,13 +28,14 @@ exports.template = function(grunt, init, done) {
     init.prompt('version', '0.1.0'),
     init.prompt('doctype', 'HTML5'),
     init.prompt('charset', 'urf-8'),
-    init.prompt('siteTitle'),
+    init.prompt('siteTitle', 'サイトタイトル'),
     init.prompt('sitePath', 'root'),
+    init.prompt('addMobileSite', 'false'),
     init.prompt('jade', 'true'),
+    init.prompt('stylesheetLang', 'sass'),
     init.prompt('uglify', 'true'),
     init.prompt('cssmin', 'false'),
     init.prompt('imagemin', 'true'),
-    init.prompt('cssExpressiveLanguage', 'sass'),
     init.prompt('transferProtocol', 'sftp'),
     init.prompt('template_dir', 'mytemp'),
     init.prompt('licenses', 'CC'),
@@ -53,7 +54,6 @@ exports.template = function(grunt, init, done) {
 
     // Files to copy (and process).
     var files = init.filesToCopy(props);
-    console.log(files);
 
     // exec
     var exec = require('child_process').exec;
@@ -73,12 +73,12 @@ exports.template = function(grunt, init, done) {
 
 
     // CSS preprocessor
-    if (props.cssExpressiveLanguage === 'sass') {
+    if (props.stylesheetLang === 'sass') {
 
         devDependenciesList["grunt-contrib-sass"] = "^0.7.3";
         delete files['gruntconfig/stylus.js'];
 
-    } else if (props.cssExpressiveLanguage === 'stylus') {
+    } else if (props.stylesheetLang === 'stylus') {
 
         devDependenciesList["grunt-contrib-stylus"] = "^0.18.0";
         delete files['gruntconfig/sass.js'];

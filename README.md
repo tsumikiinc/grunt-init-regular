@@ -2,7 +2,7 @@
 
 **Wikiで詳細を記載してます [grunt initについて](https://github.com/tsumikiinc/grunt-init-regular/wiki/grunt-init%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)**
 
-## var 0.1.4
+## var 0.1.5
 Grunt のレギュラー設定の grunt-init テンプレートです。
 
 
@@ -32,29 +32,31 @@ $ grunt-init regular
 
 ```
 プロジェクトの概要を設定します
-適宜に入力してください
+適宜入力してください
 ※ Project name にはキャメルケースかハイフンシンタックスを使用してください
 
 Please answer the following:
 [?] Project name (Project name) 
-[?] Project title (Project name) 
+[?] Project title (Project title) 
 [?] Description (The best project ever.) 
 [?] Version (0.1.0) 
 [?] doctype (HTML5) 
 [?] charset (urf-8) 
-[?] siteTitle 
+[?] siteTitle (サイトタイトル) 
 [?] sitePath (root) 
+[?] addMobileSite (false) 
 [?] jade (true) 
+[?] stylesheetLang (sass) 
 [?] uglify (true) 
 [?] cssmin (false) 
 [?] imagemin (true) 
-[?] cssExpressiveLanguage (sass) 
 [?] transferProtocol (sftp) 
 [?] template_dir (mytemp) 
 [?] Licenses (CC) 
-[?] Author name (sato) 
-[?] Author email (sato@tsumikiinc.com) 
-[?] Author url (http://www.tsumikiinc.com) 
+[?] Author name (name) 
+[?] Author email (email) 
+[?] Author url (url) 
+[?] Do you need to make any changes to the above before continuing? (y/N) 
 ```
 
 `mytemp/` ディレクトリに任意で各テンプレートファイル（_mixin.scss plugin.js 等）を追加しておけます
@@ -93,6 +95,8 @@ Please answer the following:
     │   ├── index.html
     │   └── js
     │       └── lib
+    │           ├── jquery-1.11.1.min.js
+    │           └── jquery-2.1.1.min.js
     ├── sass
     │   ├── import
     │   └── style.scss

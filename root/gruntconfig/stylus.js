@@ -6,6 +6,7 @@ module.exports = {
       'nib/*'
     ]
   },
+  {% if (addMobileSite === 'true') { %}
   pc: {
     expand: true,
     cwd: '<%= dir.src %>/<%= dir.pc %>/<%= dir.stylus %>/',
@@ -28,4 +29,17 @@ module.exports = {
     dest: '<%= dir.src %>/<%= dir.sp %>/<%= dir.root %>/<%= dir.css %>/',
     ext: '.css'
   }
+  {% } else { %}
+  compile: {
+    expand: true,
+    cwd: '<%= dir.src %>/<%= dir.stylus %>/',
+    src: [
+      '*.styl',
+      '**/*.styl',
+      '!import/*.styl'
+    ],
+    dest: '<%= dir.src %>/<%= dir.root %>/<%= dir.css %>/',
+    ext: '.css'
+  }
+  {% } %}
 };

@@ -1,5 +1,6 @@
 /* copy */
 module.exports = {
+  {% if (addMobileSite === 'true') { %}
   pc: {
     expand: true,
     cwd: '<%= dir.src %>/',
@@ -16,4 +17,14 @@ module.exports = {
     ],
     dest: '<%= dir.build %>/'
   }
+  {% } else { %}
+  build: {
+    expand: true,
+    cwd: '<%= dir.src %>/',
+    src: [
+      '<%= dir.root %>/**/*'
+    ],
+    dest: '<%= dir.build %>/'
+  }
+  {% } %}
 };

@@ -5,6 +5,7 @@ module.exports = {
     lineNumbers: true,
     sourcemap: true
   },
+  {% if (addMobileSite === 'true') { %}
   pc: {
     expand: true,
     cwd: '<%= dir.src %>/<%= dir.pc %>/<%= dir.sass %>/',
@@ -19,4 +20,13 @@ module.exports = {
     dest: '<%= dir.src %>/<%= dir.sp %>/<%= dir.root %>/<%= dir.css %>/',
     ext: '.css'
   }
+  {% } else { %}
+  compile: {
+    expand: true,
+    cwd: '<%= dir.src %>/<%= dir.sass %>/',
+    src: '*.scss',
+    dest: '<%= dir.src %>/<%= dir.root %>/<%= dir.css %>/',
+    ext: '.css'
+  }
+  {% } %}
 };

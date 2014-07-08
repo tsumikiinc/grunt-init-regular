@@ -22,6 +22,7 @@ module.exports = function(grunt) {
 
   // registerTask ----------------------
 
+  {% if (addMobileSite === 'true') { %}
   // Live reload
   grunt.registerTask('l', 'Live reloading.', function(target) {
     if (target === 'pc' || target === 'sp') {
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
 
 
   // build/ directory preview
-  grunt.registerTask('demo', 'Build directory demo.', function(target) {
+  grunt.registerTask('d', 'Build directory demo.', function(target) {
     if (target === 'pc' || target === 'sp') {
       grunt.task.run('connect:demo' + target);
     } else {
@@ -60,10 +61,10 @@ module.exports = function(grunt) {
 
 
   // build
-  grunt.registerTask('build', 'Build.', function(target) {
+  grunt.registerTask('b', 'Build.', function(target) {
     if (target === 'pc' || target === 'sp') {
       {% if (jade === 'true') { %}grunt.task.run('jade:' + target);{% } %}
-      {% if (cssExpressiveLanguage === 'sass') { %}grunt.task.run('sass:' + target);{% } else if (cssExpressiveLanguage === 'stylus') { %}grunt.task.run('stylus:' + target);{% } %}
+      {% if (stylesheetLang === 'sass') { %}grunt.task.run('sass:' + target);{% } else if (stylesheetLang === 'stylus') { %}grunt.task.run('stylus:' + target);{% } %}
       grunt.task.run('copy:' + target);
       {% if (cssmin === 'true') { %}grunt.task.run('cssmin:' + target);{% } %}
       grunt.task.run('jshint:' + target);
@@ -77,6 +78,7 @@ module.exports = function(grunt) {
 
 
 
+  // Test up.
   grunt.registerTask('testup', 'Test upload.', function(target) {
     if (target === 'pc' || target === 'sp') {
       {% if (transferProtocol === 'ftp') { %}grunt.task.run('ftp-deploy:test' + target);{% } else if (transferProtocol === 'sftp') { %}grunt.task.run('sftp-deploy:test' + target);{% }  else if (transferProtocol === 'ssh') { %}grunt.task.run('ssh:test' + target);{% } %}
@@ -88,12 +90,61 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('deploy', 'Deploy.', function(target) {
+  // Publish
+  grunt.registerTask('publish', 'Publish.', function(target) {
     if (target === 'pc' || target === 'sp') {
-      {% if (transferProtocol === 'ftp') { %}grunt.task.run('ftp-deploy:deploy' + target);{% } else if (transferProtocol === 'sftp') { %}grunt.task.run('sftp-deploy:deploy' + target);{% }  else if (transferProtocol === 'ssh') { %}grunt.task.run('ssh:deploy' + target);{% } %}
+      {% if (transferProtocol === 'ftp') { %}grunt.task.run('ftp-deploy:publish' + target);{% } else if (transferProtocol === 'sftp') { %}grunt.task.run('sftp-deploy:publish' + target);{% }  else if (transferProtocol === 'ssh') { %}grunt.task.run('ssh:publish' + target);{% } %}
     } else {
-      console.log('引数を指定してください\nexample -> grunt deploy:pc or grunt deploy:sp');
+      console.log('引数を指定してください\nexample -> grunt publish:pc or grunt publish:sp');
       return;
     }
   });
+  {% } else { %}
+  // Live reload
+  grunt.registerTask('l', 'Live reloading.', function() {
+    grunt.task.run('connect:live');
+    grunt.task.run('watch:live');
+  });
+
+
+
+  // htmlバリデーション
+  grunt.registerTask('v', 'html validation', function() {
+    grunt.task.run('validation:validate');
+  });
+
+
+
+  // build/ directory preview
+  grunt.registerTask('d', 'Build directory demo.', function() {
+    grunt.task.run('connect:demo');
+  });
+
+
+
+  // build
+  grunt.registerTask('b', 'Build.', function() {
+    {% if (jade === 'true') { %}grunt.task.run('jade:compile');{% } %}
+    {% if (stylesheetLang === 'sass') { %}grunt.task.run('sass:compile');{% } else if (stylesheetLang === 'stylus') { %}grunt.task.run('stylus:compile');{% } %}
+    grunt.task.run('copy:build');
+    {% if (cssmin === 'true') { %}grunt.task.run('cssmin:min');{% } %}
+    grunt.task.run('jshint:lint');
+    {% if (uglify === 'true') { %}grunt.task.run('uglify:min');{% } %}
+    {% if (imagemin === 'true') { %}grunt.task.run('imagemin:min');{% } %}
+  });
+
+
+
+  // Test up.
+  grunt.registerTask('testup', 'Test upload.', function() {
+    {% if (transferProtocol === 'ftp') { %}grunt.task.run('ftp-deploy:test');{% } else if (transferProtocol === 'sftp') { %}grunt.task.run('sftp-deploy:test');{% }  else if (transferProtocol === 'ssh') { %}grunt.task.run('ssh:test');{% } %}
+  });
+
+
+
+  // Publish
+  grunt.registerTask('publish', 'Publish.', function() {
+    {% if (transferProtocol === 'ftp') { %}grunt.task.run('ftp-deploy:publish');{% } else if (transferProtocol === 'sftp') { %}grunt.task.run('sftp-deploy:publish');{% }  else if (transferProtocol === 'ssh') { %}grunt.task.run('ssh:publish');{% } %}
+  });
+  {% } %}
 };

@@ -9,12 +9,12 @@ module.exports = {
     relaxerror: ['Bad value X-UA-Compatible for attribute http-equiv on element meta.'],
     failHard: true
   },
+  {% if (addMobileSite === 'true') { %}
   pc: {
     src: [
       '<%= dir.src %>/<%= dir.pc %>/<%= dir.root %>/**/*.html',
       '<%= dir.src %>/<%= dir.pc %>/<%= dir.root %>/*.html'
     ]
-
   },
   sp: {
     src: [
@@ -22,4 +22,12 @@ module.exports = {
       '<%= dir.src %>/<%= dir.pc %>/<%= dir.root %>/*.html'
     ]
   }
+  {% } else { %}
+  validate: {
+    src: [
+      '<%= dir.src %>/<%= dir.root %>/**/*.html',
+      '<%= dir.src %>/<%= dir.root %>/*.html'
+    ]
+  }
+  {% } %}
 };

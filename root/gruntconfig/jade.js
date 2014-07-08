@@ -9,6 +9,7 @@ module.exports = {
 
     }
   },
+  {% if (addMobileSite === 'true') { %}
   pc: {
     expand: true,
     cwd: '<%= dir.src %>/<%= dir.pc %>/<%= dir.jade %>/',
@@ -33,4 +34,18 @@ module.exports = {
     dest: '<%= dir.src %>/<%= dir.sp %>/<%= dir.root %>/',
     ext: '.html'
   }
+  {% } else { %}
+  compile: {
+    expand: true,
+    cwd: '<%= dir.src %>/<%= dir.jade %>/',
+    src: [
+      '*.jade',
+      '**/*.jade',
+      '!base/*',
+      '!includes/*'
+    ],
+    dest: '<%= dir.src %>/<%= dir.root %>/',
+    ext: '.html'
+  }
+  {% } %}
 };
