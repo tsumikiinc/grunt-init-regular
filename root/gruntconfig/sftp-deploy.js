@@ -1,4 +1,4 @@
-/* sftp-publish */
+/* sftp-deploy */
 module.exports = {
   {% if (addMobileSite === 'true') { %}
   testpc: {

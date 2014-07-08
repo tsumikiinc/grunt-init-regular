@@ -133,13 +133,13 @@ exports.template = function(grunt, init, done) {
 
         devDependenciesList["grunt-sftp-deploy"] = "^0.1.0";
         delete files['gruntconfig/ftp-deploy.js'];
-        delete files['gruntconfig/ssh.js'];
+        delete files['gruntconfig/sftp.js'];
 
     } else if (props.transferProtocol === 'ftp') {
 
         devDependenciesList["grunt-ftp-deploy"] = "^0.1.3";
         delete files['gruntconfig/sftp-deploy.js'];
-        delete files['gruntconfig/ssh.js'];
+        delete files['gruntconfig/sftp.js'];
 
     } else if (props.transferProtocol === 'ssh') {
 
@@ -150,7 +150,7 @@ exports.template = function(grunt, init, done) {
     } else {
         delete files['gruntconfig/ftp-deploy.js'];
         delete files['gruntconfig/sftp-deploy.js'];
-        delete files['gruntconfig/ssh.js'];
+        delete files['gruntconfig/sftp.js'];
     }
 
 
