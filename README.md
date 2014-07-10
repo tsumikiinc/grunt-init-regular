@@ -2,7 +2,7 @@
 
 **Wikiで詳細を記載してます [grunt initについて](https://github.com/tsumikiinc/grunt-init-regular/wiki/grunt-init%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)**
 
-## var 0.1.5
+## v0.1.5
 Grunt のレギュラー設定の grunt-init テンプレートです。
 
 
@@ -10,7 +10,7 @@ Grunt のレギュラー設定の grunt-init テンプレートです。
 
 `grunt-init` コアをグローバルにインストール
 ```
-$ npm install grunt-init -g
+npm install grunt-init -g
 ```
 ユーザ直下に `~/.grunt-init` ディレクトリが作成されます
 
@@ -25,8 +25,8 @@ $ git clone https://github.com/tsumikiinc/grunt-init-regular.git ~/.grunt-init/r
 プロジェクトを配置するディレクトリへ移動し `grunt-init` コマンドでテンプレートを生成します
 
 ```
-$ cd path/peoject/peoject_name
-$ grunt-init regular
+cd path/peoject/peoject_name
+grunt-init regular
 ```
 最初に以下のプロンプトに答えます
 
@@ -66,7 +66,6 @@ Please answer the following:
 ```
 .
 ├── Gruntfile.js
-├── build
 ├── gruntconfig
 │   ├── banner.js
 │   ├── connect.js
@@ -77,31 +76,25 @@ Please answer the following:
 │   ├── jade.js
 │   ├── jshint.js
 │   ├── sass.js
+│   ├── secretJSON.js
 │   ├── sftp-deploy.js
 │   ├── uglify.js
 │   └── watch.js
-├── ignore
 ├── package.json
 └── src
-    ├── jade
     ├── mytemp
     │   └── import
     │       ├── _common.scss
     │       ├── _mixin.scss
     │       └── _normalize.scss
     ├── root
-    │   ├── css
-    │   ├── img
     │   ├── index.html
     │   └── js
     │       └── lib
     │           ├── jquery-1.11.1.min.js
     │           └── jquery-2.1.1.min.js
-    ├── sass
-    │   ├── import
-    │   └── style.scss
-    └── stylus
-        └── import
+    └── sass
+        └── style.scss
 ```
 
 ## License
